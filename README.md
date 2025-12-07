@@ -6,7 +6,7 @@ The Payment APP is a Flask-based web application that enables users to transfer 
 
 1. Clone the repository:
 git clone
-https://github.com/Kikiviell/donation-app-private.git
+https://github.com/Siapasanka/donation-app-crypto-main.git
 3. Create a virtual network  `python -m venv venv`
 4. Install all dependencies using `pip install -r requirements.txt`
 5. To run the server type `./run.sh`
@@ -25,9 +25,4 @@ https://github.com/Kikiviell/donation-app-private.git
 - **lottie-player.js**- lottie-player.js is a JavaScript library for rendering animations using Lottie files. It is used in the Payment APP for displaying animations in the transaction details popup.
 
 
-## File Structure
-The relevant files and their descriptions in the project are as follows:
 
-- **app.py**: The main Flask application file that handles routing and serves the web pages.
-- **templates/index.html**: The HTML file containing the user interface and JavaScript code for the Payment APP.
-- **static/images/QR.png**: The QR code image file that can be scanned to access the application using a mobile Ethereum wallet.
