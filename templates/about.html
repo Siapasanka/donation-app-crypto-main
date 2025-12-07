@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - Blockchain Donations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Poppins', sans-serif;
+      background:#0f0f0f;
+      color:#e0e0e0;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      padding-top:70px;
+      overflow-x:hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* Blockchain animated background (sama dengan index.html) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(0,196,255,0.05) 0%, transparent 70%);
+      z-index: -2;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        radial-gradient(circle, rgba(0,196,255,0.25) 2px, transparent 2px),
+        radial-gradient(circle, rgba(0,255,150,0.25) 2px, transparent 2px);
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 40px;
+      animation: moveGrid 12s linear infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    @keyframes moveGrid {
+      0% { background-position: 0 0, 40px 40px; }
+      100% { background-position: 80px 80px, 120px 120px; }
+    }
+
+    /* Navbar */
+    .top-nav {
+      background:#1a1a1a; position:fixed; top:0; left:0; width:100%; z-index:999;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; border-bottom:1px solid rgba(0,196,255,0.2);
+    }
+    .top-nav img { max-width:50px; }
+    .top-nav h3 { color:#00c4ff; margin-left:10px; font-weight:bold; }
+    .top-nav ul { list-style:none; display:flex; gap:20px; align-items:center; }
+    .top-nav a { padding:8px 12px; border-radius:6px; transition:0.3s; }
+    .top-nav a:hover { background:#00c4ff; color:#000; }
+    .btn-wallet {
+      background:#00c4ff; color:#000; padding:8px 12px; border:none; border-radius:6px; cursor:pointer; font-weight:bold;
+      transition:0.3s;
+    }
+    .btn-wallet:hover { background:#00e6ff; box-shadow:0 0 10px #00c4ff; }
+
+    /* General Section Styling */
+    .section {
+      max-width:1100px; margin:100px auto 60px auto; padding:60px 40px;
+      background: rgba(25,25,25,0.95);
+      border-radius:15px;
+      box-shadow:0 0 30px rgba(0,196,255,0.2);
+      text-align:center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .section h1, .section h2 {
+      font-family:'Roboto Slab', serif;
+      font-size:2.5rem; color:#00c4ff; margin-bottom:20px;
+    }
+    .section p {
+      font-size:18px; color:#ccc; margin-bottom:20px;
+    }
+
+    /* Cards */
+    .cards {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px; margin-top:30px;
+    }
+    .card {
+      background:rgba(25,25,25,0.9); padding:30px; border-radius:12px;
+      box-shadow:0 0 15px rgba(0,196,255,0.1);
+      transition:transform 0.4s, box-shadow 0.4s;
+      animation: floatCard 6s ease-in-out infinite alternate;
+    }
+    .card:hover {
+      transform: scale(1.08) rotate(-1deg);
+      box-shadow:0 0 25px rgba(0,212,255,0.6), 0 0 50px rgba(0,212,255,0.2);
+    }
+    .card img {
+      width:80px; margin-bottom:15px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .card h3 { color:#00c4ff; margin-bottom:10px; }
+
+    /* CTA Section */
+    .cta {
+      max-width:900px; margin:70px auto; text-align:center;
+      background: rgba(0,196,255,0.05); padding:50px; border-radius:15px;
+      border:1px solid rgba(0,196,255,0.2);
+    }
+    .cta h2 { color:#00c4ff; margin-bottom:20px; font-size:2rem; }
+    .cta p { color:#ccc; font-size:18px; margin-bottom:25px; }
+    .btn-primary {
+      background:#00c4ff; color:#000; padding:15px 30px; font-weight:bold; border:none; border-radius:8px; cursor:pointer;
+      transition:0.3s;
+    }
+    .btn-primary:hover { background:#00e6ff; box-shadow:0 0 20px #00e6ff; }
+
+    /* Footer */
+    .footer {
+      background:#111; padding:60px 20px; text-align:center;
+    }
+    .footer-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px;
+      max-width:1200px; margin:auto; text-align:center;
+    }
+    .footer h4 { color:#00c4ff; margin-bottom:15px; font-size:18px; }
+    .footer ul { list-style:none; padding:0; }
+    .footer ul li { margin:8px 0; }
+    .footer ul li a { color:#aaa; transition:0.3s; display:inline-block; }
+    .footer ul li a:hover { color:#fff; transform:translateX(4px); }
+    .footer p { margin-top:40px; color:#666; font-size:14px; text-align:center; }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @media(max-width:768px){
+      .section h1, .section h2 { font-size:2rem; }
+      .section p { font-size:16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div style="display:flex; align-items:center;">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    <h3>Blockchain Donations</h3>
+  </div>
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('payment') }}">Donate</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <li><button class="btn-wallet" id="connectWalletBtn">Connect Wallet</button></li>
+    <li><button class="btn-wallet" id="disconnectWalletBtn" style="display:none;background:#ff4d4d;color:#fff;">Disconnect</button></li>
+  </ul>
+</nav>
+
+<div class="section">
+  <h1>About Us</h1>
+  <p>Blockchain Donations is a platform designed to revolutionize giving with full transparency and security powered by blockchain technology. Every contribution is traceable, impactful, and meaningful.</p>
+  <p>We are committed to building trust between donors and recipients, ensuring that generosity is met with complete clarity and accountability.</p>
+</div>
+
+<div class="section">
+  <h2>Our Mission</h2>
+  <p>We believe donations should be transparent, fair, and free from corruption. Our mission is to empower both donors and recipients through the power of blockchain.</p>
+  <p>Together, we can make philanthropy borderless, efficient, and truly impactful.</p>
+</div>
+
+<div class="section">
+  <h2>Why Choose Us?</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://img.icons8.com/fluency/96/blockchain.png" alt="Blockchain Icon">
+      <h3>Transparent</h3>
+      <p>Every donation is recorded on the blockchain, making it fully traceable and verifiable for everyone.</p>
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/fluency/96/lock--v1.png" alt="Secure Icon">
+      <h3>Secure</h3>
+      <p>All contributions are protected with top-level encryption and secured by smart contracts.</p>
+    </div>
+    <div class="card">
+      <img src="https://img.icons8.com/fluency/96/earth-planet.png" alt="Global Icon">
+      <h3>Global Impact</h3>
+      <p>Support projects worldwide instantly, with no borders or delays in transactions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Ready to Make a Difference?</h2>
+  <p>Connect your wallet and contribute securely. Every donation, no matter the size, makes a difference.</p>
+  <a href="{{ url_for('payment') }}" class="btn-primary">Donate Now</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Programs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="{{ url_for('payment') }}">Donation</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Collaboration</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Telegram</a></li>
+      </ul>
+    </div>
+  </div>
+  <p>&copy; 2025 Blockchain Donations. All rights reserved.</p>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const connectWalletBtn = document.getElementById("connectWalletBtn");
+    const disconnectWalletBtn = document.getElementById("disconnectWalletBtn");
+
+    function shortenAddress(address) {
+      return address.slice(0, 6) + "..." + address.slice(-4);
+    }
+
+    function checkWalletStatus() {
+      const walletAddress = localStorage.getItem("walletAddress");
+      if (walletAddress) {
+        connectWalletBtn.textContent = shortenAddress(walletAddress);
+        disconnectWalletBtn.style.display = "inline-block";
+      } else {
+        connectWalletBtn.textContent = "Connect Wallet";
+        disconnectWalletBtn.style.display = "none";
+      }
+    }
+
+    async function connectWallet() {
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const account = accounts[0];
+          localStorage.setItem("walletAddress", account);
+          checkWalletStatus();
+        } catch (err) {
+          console.error(err);
+          alert("Failed to connect wallet");
+        }
+      } else {
+        alert("MetaMask not installed!");
+      }
+    }
+
+    function disconnectWallet() {
+      localStorage.removeItem("walletAddress");
+      checkWalletStatus();
+    }
+
+    connectWalletBtn.addEventListener("click", () => {
+      const walletAddress = localStorage.getItem("walletAddress");
+      if (!walletAddress) {
+        connectWallet();
+      }
+    });
+
+    disconnectWalletBtn.addEventListener("click", () => {
+      disconnectWallet();
+    });
+
+    checkWalletStatus();
+  });
+</script>
+
+</body>
+</html>

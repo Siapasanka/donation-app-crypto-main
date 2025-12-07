@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Blockchain Donations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Poppins', sans-serif;
+      background:#0f0f0f;
+      color:#e0e0e0;
+      line-height:1.6;
+      scroll-behavior:smooth;
+      padding-top:70px;
+      overflow-x:hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* 🔹 Blockchain animated background (sama dengan halaman lain) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(0,196,255,0.05) 0%, transparent 70%);
+      z-index: -2;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        radial-gradient(circle, rgba(0,196,255,0.25) 2px, transparent 2px),
+        radial-gradient(circle, rgba(0,255,150,0.25) 2px, transparent 2px);
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 40px;
+      animation: moveGrid 12s linear infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    @keyframes moveGrid {
+      0% { background-position: 0 0, 40px 40px; }
+      100% { background-position: 80px 80px, 120px 120px; }
+    }
+
+    /* Navbar */
+    .top-nav {
+      background:#1a1a1a; position:fixed; top:0; left:0; width:100%; z-index:999;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; border-bottom:1px solid rgba(0,196,255,0.2);
+    }
+    .top-nav img { max-width:50px; }
+    .top-nav h3 { color:#00c4ff; margin-left:10px; font-weight:bold; }
+    .top-nav ul { list-style:none; display:flex; gap:20px; align-items:center; }
+    .top-nav a { padding:8px 12px; border-radius:6px; transition:0.3s; }
+    .top-nav a:hover { background:#00c4ff; color:#000; }
+    .btn-wallet {
+      background:#00c4ff; color:#000; padding:8px 12px; border:none; border-radius:6px; cursor:pointer; font-weight:bold;
+      transition:0.3s;
+    }
+    .btn-wallet:hover { background:#00e6ff; box-shadow:0 0 10px #00c4ff; }
+
+    /* Contact Section */
+    .contact-container {
+      max-width:700px;
+      margin:100px auto 50px auto;
+      background:rgba(25,25,25,0.95);
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 0 20px rgba(0,196,255,0.2);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .contact-container h2 { color:#00c4ff; margin-bottom:20px; text-align:center; }
+    .contact-container p { color:#ccc; font-size:16px; margin-bottom:20px; text-align:center; }
+    .contact-container form { display:flex; flex-direction:column; gap:15px; }
+    .contact-container input, .contact-container textarea { 
+      padding:12px; border-radius:8px; border:none; 
+      background:#1e1e1e; color:#eee; font-size:16px; width:100%;
+      transition:0.3s;
+    }
+    .contact-container input:focus, .contact-container textarea:focus {
+        outline: none;
+        box-shadow: 0 0 8px #00c4ff;
+    }
+    .contact-container textarea { resize:vertical; height:120px; }
+    .contact-container button { 
+      padding:12px; background:#00c4ff; color:#000; font-weight:bold; 
+      border:none; border-radius:8px; cursor:pointer; transition:0.3s; 
+    }
+    .contact-container button:hover { background:#00e6ff; box-shadow:0 0 20px #00e6ff; }
+    .form-message { margin-top:15px; font-weight:bold; text-align:center; }
+
+    /* Footer */
+    .footer {
+      background:#111; padding:60px 20px; text-align:center;
+    }
+    .footer-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px;
+      max-width:1200px; margin:auto; text-align:center;
+    }
+    .footer h4 { color:#00c4ff; margin-bottom:15px; font-size:18px; }
+    .footer ul { list-style:none; padding:0; }
+    .footer ul li { margin:8px 0; }
+    .footer ul li a { color:#aaa; transition:0.3s; display:inline-block; }
+    .footer ul li a:hover { color:#fff; transform:translateX(4px); }
+    .footer p { margin-top:40px; color:#666; font-size:14px; text-align:center; }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .top-nav { flex-direction:column; align-items:center; }
+      .top-nav ul { flex-direction:column; gap:10px; margin-top:10px; }
+      .contact-container { margin:100px 20px 50px 20px; padding:25px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div style="display:flex; align-items:center;">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    <h3>Blockchain Donations</h3>
+  </div>
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('payment') }}">Donate</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <li><button class="btn-wallet" id="connectWalletBtn">Connect Wallet</button></li>
+    <li><button class="btn-wallet" id="disconnectWalletBtn" style="display:none;background:#ff4d4d;color:#fff;">Disconnect</button></li>
+  </ul>
+</nav>
+
+<div class="contact-container">
+  <h2>Contact Us</h2>
+  <p>Please fill out the form below and we will get back to you shortly.</p>
+  <form method="POST" action="{{ url_for('contact') }}">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  {% if message_sent %}
+    <p class="form-message" style="color:#00ff88;">Your message has been sent successfully!</p>
+  {% endif %}
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Programs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="{{ url_for('payment') }}">Donation</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Collaboration</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Email</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">Telegram</a></li>
+      </ul>
+    </div>
+  </div>
+  <p>&copy; 2025 Blockchain Donations. All Rights Reserved.</p>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const connectWalletBtn = document.getElementById("connectWalletBtn");
+    const disconnectWalletBtn = document.getElementById("disconnectWalletBtn");
+
+    function shortenAddress(address) {
+      return address.slice(0, 6) + "..." + address.slice(-4);
+    }
+    
+    function checkWalletStatus() {
+      const walletAddress = localStorage.getItem("walletAddress");
+      if (walletAddress) {
+        connectWalletBtn.textContent = shortenAddress(walletAddress);
+        disconnectWalletBtn.style.display = "inline-block";
+      } else {
+        connectWalletBtn.textContent = "Connect Wallet";
+        disconnectWalletBtn.style.display = "none";
+      }
+    }
+
+    async function connectWallet() {
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const account = accounts[0];
+          localStorage.setItem("walletAddress", account);
+          checkWalletStatus();
+        } catch (err) {
+          console.error(err);
+          alert("Failed to connect wallet!");
+        }
+      } else {
+        alert("MetaMask not found. Please install it!");
+      }
+    }
+
+    function disconnectWallet() {
+      localStorage.removeItem("walletAddress");
+      checkWalletStatus();
+    }
+
+    connectWalletBtn.addEventListener("click", () => {
+      const walletAddress = localStorage.getItem("walletAddress");
+      if (!walletAddress) {
+        connectWallet();
+      }
+    });
+
+    disconnectWalletBtn.addEventListener("click", () => {
+      disconnectWallet();
+    });
+
+    checkWalletStatus();
+  });
+</script>
+
+</body>
+</html>

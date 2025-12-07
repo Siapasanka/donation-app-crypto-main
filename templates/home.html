@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Blockchain Donations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding-top: 60px;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* Navbar */
+    .top-nav {
+      background: #1a1a1a;
+      position: fixed; top:0; left:0; width:100%; z-index:999;
+      box-shadow:0 2px 10px rgba(0,0,0,0.6);
+      transition: background 0.3s ease;
+    }
+    .top-nav.translucent { background: rgba(26,26,26,0.8); backdrop-filter: blur(8px);}
+    .top-nav .container { max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center; padding:8px 20px; }
+    .top-nav h3 { color:#00c4ff; font-size:20px; font-weight:bold; }
+    .top-nav img { max-width:60px; margin-right:10px; }
+    .top-nav ul { display:flex; gap:15px; list-style:none; }
+    .top-nav a { color:#eee; font-weight:500; padding:10px 15px; border-radius:6px; transition: all 0.3s; }
+    .top-nav a:hover { background:#00c4ff; color:#000; }
+
+    /* About Section */
+    .about-container {
+      max-width:900px;
+      margin:80px auto 50px auto;
+      background: rgba(25,25,25,0.95);
+      padding:30px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,196,255,0.2);
+    }
+    .about-container h2 {
+      text-align:center; margin-bottom:20px; color:#00c4ff;
+    }
+    .about-container p {
+      color:#ccc; font-size:16px; line-height:1.6; margin-bottom:15px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #111;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .footer-col { width:25%; padding:10px; display:inline-block; vertical-align:top; text-align:left; }
+    .footer h4 { color:#00c4ff; margin-bottom:15px; }
+    .footer ul { list-style:none; }
+    .footer ul li { margin:8px 0; }
+    .footer ul li a { color:#aaa; transition:0.3s; }
+    .footer ul li a:hover { color:#fff; padding-left:6px; }
+    .footer p { margin-top:20px; color:#666; font-size:14px; }
+
+    /* Consistent Page Layout */
+    h1.page-title {
+      text-align:center;
+      color:#00e0ff;
+      margin:50px 0 30px 0;
+      font-size:2.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="top-nav">
+    <div class="container">
+      <div style="display:flex;align-items:center;">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        <h3>Blockchain Donations</h3>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('payment') }}" target="_blank">Donate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h1 class="page-title">About Us</h1>
+
+  <!-- About Section -->
+  <div class="about-container">
+    <p>
+      Our Blockchain Donations platform is dedicated to creating transparency and trust in charitable donations. 
+      Using blockchain technology, we ensure that every donation is traceable and reaches the people who truly need it. 
+      Our mission is to leverage cutting-edge technology to fight child hunger, support education, and uplift communities.
+    </p>
+    <p>
+      By combining technology and compassion, we aim to create a world where everyone has access to food, education, and opportunities. 
+      Join us in our journey to make a difference and bring smiles to the lives of those in need.
+    </p>
+    <p>
+      Blockchain ensures security, transparency, and accountability for every donor. With your support, we can continue to make a measurable impact.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Programs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Donation</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Collab</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">Mobile: +91 9552874929</a></li>
+        <li><a href="#">Gmail: abhishekjanihere@gmail.com</a></li>
+      </ul>
+    </div>
+    <p>&copy; Blockchain Lab Project 2025</p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener("scroll", function(){
+      var topNav = document.querySelector(".top-nav");
+      if(window.scrollY > 0){ topNav.classList.add("translucent"); }
+      else{ topNav.classList.remove("translucent"); }
+    });
+  </script>
+</body>
+</html>
